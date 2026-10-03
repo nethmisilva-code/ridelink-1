@@ -23,7 +23,16 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
+      # While the services are still being added one pull request at a time,
+      # a service whose folder does not exist yet is skipped instead of failing.
+      - name: Check the service exists
+        id: present
+        working-directory: .
+        run: |
+          if [ -f "${{ matrix.service }}/pom.xml" ]; then echo "exists=true" >> "$GITHUB_OUTPUT"; else echo "exists=false" >> "$GITHUB_OUTPUT"; echo "${{ matrix.service }} not in this branch yet, skipping"; fi
+
       - name: Set up JDK 21
+        if: steps.present.outputs.exists == 'true'
         uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -32,13 +41,15 @@ jobs:
           cache-dependency-path: ${{ matrix.service }}/pom.xml
 
       - name: Make Maven wrapper executable
+        if: steps.present.outputs.exists == 'true'
         run: chmod +x mvnw
 
       - name: Build and run unit tests
+        if: steps.present.outputs.exists == 'true'
         run: ./mvnw -B -ntp clean verify
 
       - name: Upload test reports
-        if: always()
+        if: always() && steps.present.outputs.exists == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.service }}-test-reports

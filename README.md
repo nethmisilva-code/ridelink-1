@@ -8,10 +8,10 @@ Swagger UI and the shared Postman collection are the official interfaces. There 
 
 | # | Microservice | Port | Primary owner | Database |
 |---|---|---|---|---|
-| 1 | Account Service | 8081 | _Member 1 name (student ID)_ | `ridelink_accounts` |
-| 2 | Driver & Vehicle Service | 8082 | Nethmi Silva (IT24101682) | `ridelink_drivers` |
-| 3 | Ride Management Service | 8083 | _Member 3 name (student ID)_ | `ridelink_rides` |
-| 4 | Fare & Payment Service | 8084 | _Member 4 name (student ID)_ | `ridelink_payments` |
+| 1 | Account Service | 8081 | Aththanayake A M S M (IT24102367)_ | `ridelink_accounts` |
+| 2 | Driver & Vehicle Service | 8082 | Silva N R (IT24101682) [Nethmi Silva in Github] | `ridelink_drivers` |
+| 3 | Ride Management Service | 8083 | Marikkar F M M A (IT24101598)_ | `ridelink_rides` |
+| 4 | Fare & Payment Service | 8084 | Perera A P K N (IT24102304)_ | `ridelink_payments` |
 
 The whole group owns the architecture, the API contracts and the integration.
 
@@ -36,11 +36,8 @@ Full diagrams: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) and [docs/SEQUENCE-D
 ## Prerequisites
 
 * JDK 21 (`java -version` must show 21 or later). Maven is not needed; each service includes the Maven wrapper.
-* MongoDB, one of:
-  * MongoDB Community Server running locally on port 27017, or
-  * Docker Desktop, then `docker compose up -d` in this folder, or
-  * a MongoDB Atlas cluster (set the four `*_MONGODB_URI` values in `.env`).
-* Postman (desktop) for the demo. Node.js is optional, only for running the collection from the command line.
+* MongoDB
+* Postman (desktop) for the demo.  only for running the collection from the command line.
 * Internet access the first time you build, so Maven can download dependencies.
 
 ## Quick start (about 3 minutes, first build takes longer)
@@ -79,7 +76,6 @@ All settings come from environment variables. For local runs they are read from 
 | `*_SERVICE_PORT` | each service | 8081, 8082, 8083, 8084 |
 | `DRIVER_LOCATION_MAX_AGE_MINUTES` | Driver & Vehicle | `30` |
 
-**Using existing Atlas data:** put the Atlas connection string in the relevant `*_MONGODB_URI` and the existing database name in `*_MONGODB_DATABASE`. Older account documents with role `CUSTOMER` are still readable and are treated as `PASSENGER`.
 
 ## Running a single service manually
 
@@ -135,7 +131,6 @@ Details: [docs/TESTING.md](docs/TESTING.md).
 4. Show two negative cases live in Swagger: starting a ride before it is accepted (409) and calling an admin endpoint with a passenger token (403).
 5. Show the CI run in GitHub Actions.
 
-More detail and likely viva questions: [docs/VIVA-GUIDE.md](docs/VIVA-GUIDE.md).
 
 ## Project structure
 
