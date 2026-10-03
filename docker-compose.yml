@@ -1,0 +1,14 @@
+# Optional: local MongoDB for RideLink. Start with "docker compose up -d".
+# Each service uses its own database on this server (see .env.example).
+services:
+  mongodb:
+    image: mongo:7
+    container_name: ridelink-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - ridelink-mongo-data:/data/db
+    restart: unless-stopped
+
+volumes:
+  ridelink-mongo-data:

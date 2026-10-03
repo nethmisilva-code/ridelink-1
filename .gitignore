@@ -1,0 +1,31 @@
+# Secrets and local configuration
+.env
+*.env
+!.env.example
+application-local.properties
+
+# Build output
+target/
+!.mvn/wrapper/maven-wrapper.jar
+*.class
+*.jar
+!.mvn/wrapper/*.jar
+
+# Runtime
+logs/
+reports/
+*.log
+*.pid
+
+# IDEs and OS
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+.DS_Store
+Thumbs.db
+
+# Node (Newman)
+node_modules/
